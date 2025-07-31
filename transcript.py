@@ -1,3 +1,4 @@
+import re
 import torch
 from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor, pipeline
 # Challenge: 
@@ -14,6 +15,7 @@ from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor, pipeline
 # How to improve correctness of scoring using the labelled data set
 # What is pipeline and workflow
 # Should be integrated with Apache Airflow
+# Need to remove loop words, e.g. "cai cai cai cai"
 if torch.cuda.is_available():
     # Need to install CUDA driver or CUDA toolkit.
     # sudo apt install nvidia-cuda-toolkit
@@ -39,12 +41,19 @@ pipe = pipeline(
     model=model,
     tokenizer=processor.tokenizer,
     feature_extractor=processor.feature_extractor,
-    chunk_length_s=30,
-    batch_size=16,  # batch size for inference - set based on your device
+    # chunk_length_s=30,
+    return_timestamps=True,
+    batch_size=2048,  # batch size for inference - set based on your device
     torch_dtype=torch_dtype,
     device=device,
 )
 
-result = pipe("audio_output/ai_presentation.mp3", generate_kwargs={"language": "vietnamese"})
+def transcript(input_file_name: str, language: str="vietnamese"):
 
-print(result["text"])
+    result = pipe(f"audio_output/{input_file_name}.mp3", generate_kwargs={"language": f"{language}"})
+
+    with open(f"transcript/{input_file_name}.md", "w", encoding="utf-8") as file:
+            file.write(result["text"])
+
+if __name__ == "__main__":
+     transcript("son_interview")

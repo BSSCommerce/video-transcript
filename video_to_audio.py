@@ -70,18 +70,18 @@ def convert_video_to_audio(video_path, audio_path, audio_format="mp3"):
 
 # --- Cách sử dụng ---
 if __name__ == "__main__":
-    input_video = "sample_videos/ai_presentation.mp4"
-    output_audio_mp3 = "audio_output/ai_presentation.mp3"
-    output_audio_aac = "audio_output/ai_presentation.aac"
-    output_audio_wav = "audio_output/ai_presentation.wav"
+    input_video = "sample_videos/son_interview.mp4"
+    output_audio_mp3 = "audio_output/son_interview.mp3"
+    # output_audio_aac = "audio_output/ai_presentation.aac"
+    # output_audio_wav = "audio_output/ai_presentation.wav"
 
     # Ví dụ 1: Chuyển đổi sang MP3
     convert_video_to_audio(input_video, output_audio_mp3, audio_format="mp3")
 
     # Ví dụ 2: Chuyển đổi sang AAC
-    convert_video_to_audio(input_video, output_audio_aac, audio_format="aac")
+    # convert_video_to_audio(input_video, output_audio_aac, audio_format="aac")
     
     # Ví dụ 3: Chuyển đổi sang WAV
-    convert_video_to_audio(input_video, output_audio_wav, audio_format="wav")
+    # convert_video_to_audio(input_video, output_audio_wav, audio_format="wav")
     
     
