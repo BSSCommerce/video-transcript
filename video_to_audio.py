@@ -15,7 +15,7 @@ def convert_video_to_audio(video_path, audio_path, audio_format="mp3"):
         print(f"Error: Video file not found at path '{video_path}'")
         return
 
-    # Kiểm tra và tạo thư mục chứa file audio nếu chưa có
+    # Check and create the folder containing the audio file if it doesn't exist
     output_dir = os.path.dirname(audio_path)
     if output_dir and not os.path.exists(output_dir):
         os.makedirs(output_dir)
@@ -54,34 +54,34 @@ def convert_video_to_audio(video_path, audio_path, audio_format="mp3"):
     command.append(audio_path)
 
     try:
-        print(f"Đang chuyển đổi: '{video_path}' sang '{audio_path}'...")
+        print(f"Converting: '{video_path}' sang '{audio_path}'...")
         process = subprocess.run(command, check=True, capture_output=True, text=True)
-        print("Chuyển đổi hoàn tất!")
+        print("Conversion complete!")
         print(process.stdout)
         if process.stderr:
             print(process.stderr)
 
     except subprocess.CalledProcessError as e:
-        print(f"Lỗi khi chuyển đổi: {e}")
-        print("Đầu ra lỗi FFmpeg:")
+        print(f"Converting Error: {e}")
+        print("FFmpeg Error:")
         print(e.stderr)
     except FileNotFoundError:
-        print("Lỗi: FFmpeg không tìm thấy. Đảm bảo FFmpeg đã được cài đặt và có trong PATH của bạn.")
+        print("Error: FFmpeg not found. Make sure FFmpeg is installed and in your PATH.")
 
-# --- Cách sử dụng ---
+# --- How to use ---
 if __name__ == "__main__":
     input_video = "sample_videos/son_interview.mp4"
     output_audio_mp3 = "audio_output/son_interview.mp3"
     # output_audio_aac = "audio_output/ai_presentation.aac"
     # output_audio_wav = "audio_output/ai_presentation.wav"
 
-    # Ví dụ 1: Chuyển đổi sang MP3
+    # Example 1: Convert to MP3
     convert_video_to_audio(input_video, output_audio_mp3, audio_format="mp3")
 
-    # Ví dụ 2: Chuyển đổi sang AAC
+    # Example 2: Convert to AAC
     # convert_video_to_audio(input_video, output_audio_aac, audio_format="aac")
     
-    # Ví dụ 3: Chuyển đổi sang WAV
+    # Example 3: Convert to WAV
     # convert_video_to_audio(input_video, output_audio_wav, audio_format="wav")
     
     

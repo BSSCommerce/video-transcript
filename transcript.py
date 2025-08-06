@@ -15,7 +15,7 @@ from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor, pipeline
 # How to improve correctness of scoring using the labelled data set
 # What is pipeline and workflow
 # Should be integrated with Apache Airflow
-# Need to remove loop words, e.g. "cai cai cai cai"
+# @todo: need to remove loop words, e.g. "cai cai cai cai"
 if torch.cuda.is_available():
     # Need to install CUDA driver or CUDA toolkit.
     # sudo apt install nvidia-cuda-toolkit
